@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "382307664191",
+    "project_id": "olympusmobile-72d79",
+    "storage_bucket": "olympusmobile-72d79.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:382307664191:android:07bcddb2b2bf2de387938a",
+        "android_client_info": {
+          "package_name": "com.ozkan.olympusfitnesscenter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "382307664191-edp2ei19b22q4ga0e6jmevgombf7lrr6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4risdUu2ZU6q2pa5ZYd3iRrrYTC3mSCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "382307664191-edp2ei19b22q4ga0e6jmevgombf7lrr6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

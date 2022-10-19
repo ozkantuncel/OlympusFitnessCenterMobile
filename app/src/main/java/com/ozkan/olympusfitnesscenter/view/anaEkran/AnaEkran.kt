@@ -22,64 +22,73 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
 import com.ozkan.olympusfitnesscenter.R
 import kotlinx.coroutines.launch
 
 
 @Composable
-fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
+fun AnaEkran(navController: NavController, auth: FirebaseAuth) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
 
-    val selectedItem = remember{ mutableStateOf(-1) }
-    
-    Box{
-        Image(painter = painterResource(id = R.drawable.fts),
-            contentDescription ="" ,
+    val selectedItem = remember { mutableStateOf(-1) }
+
+    Box {
+        Image(
+            painter = painterResource(id = R.drawable.fts),
+            contentDescription = "",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds)
+            contentScale = ContentScale.FillBounds
+        )
 
         Scaffold(
             backgroundColor = Color.Transparent,
             scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar(
-                    title = { Image(painter = painterResource(id = R.drawable.logo), contentDescription = "", modifier = Modifier.padding(start = 50.dp)) },
+                    title = {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "",
+                            modifier = Modifier.padding(start = 50.dp)
+                        )
+                    },
                     backgroundColor = colorResource(id = R.color.orengeAna),
                     navigationIcon = {
-                        Icon(painter = painterResource(id = R.drawable.menu_pic), contentDescription ="" , modifier = Modifier.clickable {
-                            scope.launch {
-                                scaffoldState.drawerState.open()
-                            }
-                        })
+                        Icon(
+                            painter = painterResource(id = R.drawable.menu_pic),
+                            contentDescription = "",
+                            modifier = Modifier.clickable {
+                                scope.launch {
+                                    scaffoldState.drawerState.open()
+                                }
+                            })
                     }
                 )
             },
             content = {
-                if(selectedItem.value==0){
+                if (selectedItem.value == 0) {
                     navController.navigate("profil")
                 }
-                if(selectedItem.value ==1){
+                if (selectedItem.value == 1) {
                     navController.navigate("randevuEkrani")
                 }
-                if(selectedItem.value ==2){
+                if (selectedItem.value == 2) {
                     navController.navigate("canliDestek")
                 }
-                if(selectedItem.value==3){
+                if (selectedItem.value == 3) {
                     navController.navigate("istekveÖneri")
                 }
-                if (selectedItem.value==4){
+                if (selectedItem.value == 4) {
                     navController.navigate("iletisimveHakinde")
                 }
-                
 
-                
+
+
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.SpaceAround,
@@ -102,15 +111,20 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                             shape = RoundedCornerShape(corner = CornerSize(16.dp)),
                             border = BorderStroke(1.5.dp, Color.Yellow)
                         ) {
-                            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.clickable {
-                                navController.navigate("antrenman")
-                                Log.e("Card","Tiklendi")
-                            }){
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier.clickable {
+                                    navController.navigate("antrenman")
+                                    Log.e("Card", "Tiklendi")
+                                }) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
 
-                                ) {
-                                    Image(painter = painterResource(id = R.drawable.card1), contentDescription ="" )
+                                    ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.card1),
+                                        contentDescription = ""
+                                    )
 
                                 }
                             }
@@ -123,15 +137,20 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                             shape = RoundedCornerShape(corner = CornerSize(16.dp)),
                             border = BorderStroke(1.5.dp, Color.Yellow)
                         ) {
-                            Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.clickable {
-                                navController.navigate("beslenme")
-                                Log.e("Card","Tiklendi")
-                            }){
+                            Row(
+                                horizontalArrangement = Arrangement.Center,
+                                modifier = Modifier.clickable {
+                                    navController.navigate("beslenme")
+                                    Log.e("Card", "Tiklendi")
+                                }) {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally,
 
-                                ) {
-                                    Image(painter = painterResource(id = R.drawable.card2), contentDescription ="" )
+                                    ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.card2),
+                                        contentDescription = ""
+                                    )
 
                                 }
                             }
@@ -148,15 +167,20 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
                         border = BorderStroke(1.5.dp, Color.Yellow)
                     ) {
-                        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.clickable {
-                            navController.navigate("programYaratma")
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.clickable {
+                                navController.navigate("programYaratma")
 
-                        }){
+                            }) {
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,
 
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.card3), contentDescription ="" )
+                                ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.card3),
+                                    contentDescription = ""
+                                )
 
                             }
                         }
@@ -168,16 +192,21 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                         shape = RoundedCornerShape(corner = CornerSize(16.dp)),
                         border = BorderStroke(1.5.dp, Color.Yellow)
                     ) {
-                        Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.clickable {
-                            navController.navigate("sporAletleri")
-                            Log.e("Card","Tiklendi")
+                        Row(
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.clickable {
+                                navController.navigate("sporAletleri")
+                                Log.e("Card", "Tiklendi")
 
-                        }){
+                            }) {
                             Column(
                                 horizontalAlignment = Alignment.CenterHorizontally,
 
-                            ) {
-                                Image(painter = painterResource(id = R.drawable.card4), contentDescription ="" )
+                                ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.card4),
+                                    contentDescription = ""
+                                )
 
                             }
                         }
@@ -185,24 +214,37 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
 
                     Spacer(modifier = Modifier.height(50.dp))
                     Row() {
-                        Text(text = "Salondaki kişi sayısı: ", color = Color.Yellow, fontSize = 20.sp)
-                        Text(text = "23", color = Color.Green, fontSize =20.sp )
+                        Text(
+                            text = "Salondaki kişi sayısı: ",
+                            color = Color.Yellow,
+                            fontSize = 20.sp
+                        )
+                        Text(text = "23", color = Color.Green, fontSize = 20.sp)
                     }
                 }
             },
             drawerContent = {
-                Column(modifier = Modifier
-                    .fillMaxSize()
-                    .background(colorResource(id = R.color.drawAna))) {
-                    Column(modifier = Modifier
-                        .fillMaxWidth()
-                        .size(50.dp)
-                        .background(colorResource(id = R.color.orengeAna)), verticalArrangement = Arrangement.SpaceAround, horizontalAlignment = Alignment.End) {
-                        Icon(painter = painterResource(id = R.drawable.menu_pic), contentDescription = "", modifier = Modifier.clickable {
-                            scope.launch {
-                                scaffoldState.drawerState.close()
-                            }
-                        })
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(colorResource(id = R.color.drawAna))
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .size(50.dp)
+                            .background(colorResource(id = R.color.orengeAna)),
+                        verticalArrangement = Arrangement.SpaceAround,
+                        horizontalAlignment = Alignment.End
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.menu_pic),
+                            contentDescription = "",
+                            modifier = Modifier.clickable {
+                                scope.launch {
+                                    scaffoldState.drawerState.close()
+                                }
+                            })
                     }
                     DropdownMenuItem(onClick = {
                         selectedItem.value = 0
@@ -237,7 +279,10 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                             scaffoldState.drawerState.close()
                         }
                     }) {
-                        Text(text = "İSTEK VE ÖNERİLER", color = colorResource(id = R.color.orengeAna))
+                        Text(
+                            text = "İSTEK VE ÖNERİLER",
+                            color = colorResource(id = R.color.orengeAna)
+                        )
                     }
 
                     DropdownMenuItem(onClick = {
@@ -246,7 +291,10 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                             scaffoldState.drawerState.close()
                         }
                     }) {
-                        Text(text = "İLETŞİM&HAKKINDA", color = colorResource(id = R.color.orengeAna))
+                        Text(
+                            text = "İLETŞİM&HAKKINDA",
+                            color = colorResource(id = R.color.orengeAna)
+                        )
                     }
 
                     Row(
@@ -261,8 +309,13 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
 
                         IconButton(onClick = {
                             auth.signOut()
-                            navController.navigate("mainpage") }) {
-                            Icon(painter = painterResource(id = R.drawable.exit_pic72), contentDescription = "", tint = Color.Red)
+                            navController.navigate("mainpage")
+                        }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.exit_pic72),
+                                contentDescription = "",
+                                tint = Color.Red
+                            )
 
                         }
 
@@ -270,13 +323,13 @@ fun AnaEkran(navController: NavController,auth: FirebaseAuth) {
                 }
             }
         )
-        val activity =(LocalContext.current as Activity)
+        val activity = (LocalContext.current as Activity)
         BackHandler(onBack = {
-            if(scaffoldState.drawerState.isOpen){
+            if (scaffoldState.drawerState.isOpen) {
                 scope.launch {
                     scaffoldState.drawerState.close()
                 }
-            }else{
+            } else {
                 activity.finish()
             }
         })

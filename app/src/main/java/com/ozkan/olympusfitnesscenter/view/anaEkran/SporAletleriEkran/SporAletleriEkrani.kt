@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,27 +17,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.google.gson.Gson
 import com.ozkan.olympusfitnesscenter.R
 import com.ozkan.olympusfitnesscenter.viewmodel.AletViewModel
-import com.ozkan.olympusfitnesscenter.viewmodel.ProgramViewModel
 import com.skydoves.landscapist.glide.GlideImage
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 
 @Composable
 fun SporAletleriEkrani(navController: NavController) {
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
 
     val aramaYapiliyor = remember { mutableStateOf(false) }
     val tfArama = remember { mutableStateOf("") }
 
     val viewModel: AletViewModel = viewModel()
     val aletListesi = viewModel.aletListesi.observeAsState(listOf())
-
 
     Box {
 
@@ -95,34 +88,38 @@ fun SporAletleriEkrani(navController: NavController) {
             },
 
             content = {
-                LazyColumn(modifier = Modifier.background(color = Color.LightGray)){
+                LazyColumn(modifier = Modifier.background(color = Color.LightGray)) {
                     items(
                         count = aletListesi.value!!.count(),
                         itemContent = {
                             val alet = aletListesi.value!![it]
-                            Card(modifier = Modifier
-                                .padding(all = 5.dp)
-                                .fillMaxWidth()){
+                            Card(
+                                modifier = Modifier
+                                    .padding(all = 5.dp)
+                                    .fillMaxWidth()
+                            ) {
                                 Row(modifier = Modifier.clickable {
 
 
                                     navController.navigate("aletDetay/${alet.alet_kullanim}")
 
-                                }){
+                                }) {
                                     Row(
                                         modifier = Modifier
                                             .padding(all = 10.dp)
-                                            .fillMaxWidth()
-                                        ,
+                                            .fillMaxWidth(),
                                         verticalAlignment = Alignment.CenterVertically,
                                         horizontalArrangement = Arrangement.SpaceBetween
-                                    ){
+                                    ) {
 
                                         Column(
                                             verticalArrangement = Arrangement.SpaceEvenly,
                                             modifier = Modifier.fillMaxHeight()
                                         ) {
-                                            GlideImage(imageModel = "${alet.alet_resmi}", modifier = Modifier.size(120.dp))
+                                            GlideImage(
+                                                imageModel = "${alet.alet_resmi}",
+                                                modifier = Modifier.size(120.dp)
+                                            )
 
                                         }
                                         Text(text = "Spor Aletinin Adı:${alet.alet_ismi}")

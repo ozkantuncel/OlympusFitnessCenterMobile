@@ -28,7 +28,7 @@ import com.ozkan.olympusfitnesscenter.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun KayitEkrani(auth: FirebaseAuth,navController: NavController){
+fun KayitEkrani(auth: FirebaseAuth, navController: NavController) {
     val tfEmail = remember { mutableStateOf("") }
     val tfPass = remember { mutableStateOf("") }
     val tfPass2 = remember { mutableStateOf("") }
@@ -37,16 +37,22 @@ fun KayitEkrani(auth: FirebaseAuth,navController: NavController){
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
     Box {
-        Image(painter = painterResource(id = R.drawable.fts),
-            contentDescription ="" , modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds)
+        Image(
+            painter = painterResource(id = R.drawable.fts),
+            contentDescription = "", modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
         Scaffold(
-            scaffoldState=scaffoldState,
+            scaffoldState = scaffoldState,
             topBar = {
-                     TopAppBar(backgroundColor = colorResource(id = R.color.orengeAna),
-                         title = {
-                         Text(text = "Üyelik Oluşturma", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                     })  
+                TopAppBar(backgroundColor = colorResource(id = R.color.orengeAna),
+                    title = {
+                        Text(
+                            text = "Üyelik Oluşturma",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    })
             },
             backgroundColor = Color.Transparent,
             content = {
@@ -58,16 +64,26 @@ fun KayitEkrani(auth: FirebaseAuth,navController: NavController){
                 ) {
 
                     OutlinedTextField(value = tfEmail.value,
-                        leadingIcon = { Icon(painter = painterResource(id = R.drawable.person_pic), contentDescription = "") },
-                        onValueChange ={tfEmail.value = it},
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.person_pic),
+                                contentDescription = ""
+                            )
+                        },
+                        onValueChange = { tfEmail.value = it },
                         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         placeholder = { Text(text = "E-Mail") }
                     )
 
                     OutlinedTextField(value = tfPass.value,
-                        leadingIcon = { Icon(painter = painterResource(id = R.drawable.lock_pic), contentDescription = "") },
-                        onValueChange ={tfPass.value = it},
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.lock_pic),
+                                contentDescription = ""
+                            )
+                        },
+                        onValueChange = { tfPass.value = it },
                         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
@@ -75,32 +91,46 @@ fun KayitEkrani(auth: FirebaseAuth,navController: NavController){
                     )
 
                     OutlinedTextField(value = tfPass2.value,
-                        leadingIcon = { Icon(painter = painterResource(id = R.drawable.lock_pic), contentDescription = "") },
-                        onValueChange ={tfPass2.value = it},
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.lock_pic),
+                                contentDescription = ""
+                            )
+                        },
+                        onValueChange = { tfPass2.value = it },
                         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         placeholder = { Text(text = "Sifreyi tekrar giriniz") }
                     )
-                    Button(onClick = {
-                        if(tfEmail.value.equals("")||tfPass.value.equals("")||(!tfPass.value.equals(tfPass2.value))){
-                           scope.launch {
-                               scaffoldState.snackbarHostState.showSnackbar(message = "Hatalı Deneme")
-                           }
-                        }else{
-                            auth.createUserWithEmailAndPassword(tfEmail.value,tfPass.value).
-                                    addOnSuccessListener {
+                    Button(
+                        onClick = {
+                            if (tfEmail.value.equals("") || tfPass.value.equals("") || (!tfPass.value.equals(
+                                    tfPass2.value
+                                ))
+                            ) {
+                                scope.launch {
+                                    scaffoldState.snackbarHostState.showSnackbar(message = "Hatalı Deneme")
+                                }
+                            } else {
+                                auth.createUserWithEmailAndPassword(tfEmail.value, tfPass.value)
+                                    .addOnSuccessListener {
                                         scope.launch {
                                             scaffoldState.snackbarHostState.showSnackbar(message = "Üye oluşturuldu")
                                             navController.navigate("mainPage")
                                         }
-                                    }.addOnFailureListener{
+                                    }.addOnFailureListener {
                                     scope.launch {
-                                        Toast.makeText(context,it.localizedMessage,Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            context,
+                                            it.localizedMessage,
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
+                                }
                             }
-                        }
-                    }, colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.buutonG)),
+                        },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.buutonG)),
                         shape = CutCornerShape(10),
                         modifier = Modifier.size(width = 275.dp, height = 60.dp)
                     ) {

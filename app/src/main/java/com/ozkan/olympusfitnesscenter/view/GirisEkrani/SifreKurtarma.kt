@@ -15,38 +15,38 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import com.ozkan.olympusfitnesscenter.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun SifreKurtarmaEkrani(auth: FirebaseAuth,navController: NavController){
+fun SifreKurtarmaEkrani(auth: FirebaseAuth) {
     val tfEmail = remember { mutableStateOf("") }
-    //val tfPass = remember { mutableStateOf("") }
-    //val tfPassVis = remember { mutableStateOf(false) }
-
-
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+
     Box {
-        Image(painter = painterResource(id = R.drawable.fts),
-            contentDescription ="" , modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds)
+        Image(
+            painter = painterResource(id = R.drawable.fts),
+            contentDescription = "", modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.FillBounds
+        )
         Scaffold(
-            scaffoldState=scaffoldState,
+            scaffoldState = scaffoldState,
             topBar = {
                 TopAppBar(backgroundColor = colorResource(id = R.color.orengeAna),
                     title = {
-                        Text(text = "Şifre Sıfırlama", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                        Text(
+                            text = "Şifre Sıfırlama",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold
+                        )
                     })
             },
             backgroundColor = Color.Transparent,
@@ -59,33 +59,39 @@ fun SifreKurtarmaEkrani(auth: FirebaseAuth,navController: NavController){
                 ) {
                     Spacer(modifier = Modifier.size(200.dp))
                     OutlinedTextField(value = tfEmail.value,
-                    leadingIcon = { Icon(painter = painterResource(id = R.drawable.person_pic), contentDescription = "") },
-                    onValueChange ={tfEmail.value = it},
-                    colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                    placeholder = { Text(text = "E-Mail Adresinizi Giriniz") }
-                )
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.person_pic),
+                                contentDescription = ""
+                            )
+                        },
+                        onValueChange = { tfEmail.value = it },
+                        colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.White),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                        placeholder = { Text(text = "E-Mail Adresinizi Giriniz") }
+                    )
 
-                    Button(onClick = {
-                        if(tfEmail.value.equals("")){
-                            scope.launch {
-                                scaffoldState.snackbarHostState.showSnackbar(message = "Hatalı işlem")
-                            }
-                        }else{
-                            auth.sendPasswordResetEmail(tfEmail.value).
-                                    addOnCompleteListener{
-                                        if(it.isSuccessful){
-                                            scope.launch {
-                                                scaffoldState.snackbarHostState.showSnackbar(message = "${tfEmail.value} - e kurtama adresi yolandi")
-                                            }
-                                        }else{
-                                            scope.launch {
-                                                scaffoldState.snackbarHostState.showSnackbar(message = "Bir sorun var")
-                                            }
+                    Button(
+                        onClick = {
+                            if (tfEmail.value.equals("")) {
+                                scope.launch {
+                                    scaffoldState.snackbarHostState.showSnackbar(message = "Hatalı işlem")
+                                }
+                            } else {
+                                auth.sendPasswordResetEmail(tfEmail.value).addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                        scope.launch {
+                                            scaffoldState.snackbarHostState.showSnackbar(message = "${tfEmail.value} - e kurtama adresi yolandi")
+                                        }
+                                    } else {
+                                        scope.launch {
+                                            scaffoldState.snackbarHostState.showSnackbar(message = "Bir sorun var")
                                         }
                                     }
-                        }
-                    }, colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.buutonG)),
+                                }
+                            }
+                        },
+                        colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.buutonG)),
                         shape = CutCornerShape(10),
                         modifier = Modifier.size(width = 275.dp, height = 60.dp),
                     ) {

@@ -16,7 +16,7 @@ class BeslenmeViewModel:ViewModel() {
     }
 
     fun yemekleriAl(){
-        yemekAl.tümYemekleriAL()
+        yemekAl.tumYemekleriAL()
     }
 
     fun ara(aramaKelimesi:String){

@@ -15,40 +15,39 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import com.google.firebase.auth.FirebaseAuth
 import com.ozkan.olympusfitnesscenter.R
 import com.ozkan.olympusfitnesscenter.entity.Program
-import com.ozkan.olympusfitnesscenter.viewmodel.ProgramKayitViewModel
 import com.ozkan.olympusfitnesscenter.viewmodel.ProgramViewModel
 
 @Composable
-fun AntremanDetay(program: Program){
+fun AntremanDetay(program: Program) {
 
     val tfYazi = remember { mutableStateOf("") }
-    val tfProgramAdi = remember{ mutableStateOf("") }
-    val tfEMail = remember{ mutableStateOf("")}
+    val tfProgramAdi = remember { mutableStateOf("") }
+    val tfEMail = remember { mutableStateOf("") }
 
     val viewModel: ProgramViewModel = viewModel()
 
-    LaunchedEffect(key1 = true){
+    LaunchedEffect(key1 = true) {
         tfYazi.value = program.kisi_program!!
         tfProgramAdi.value = program.program_ad!!
         tfEMail.value = program.kisi_email!!
     }
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    Box{
-        Image(painter = painterResource(id = R.drawable.fts), contentDescription = "",
+    Box {
+        Image(
+            painter = painterResource(id = R.drawable.fts), contentDescription = "",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds)
+            contentScale = ContentScale.FillBounds
+        )
         Scaffold(
             scaffoldState = scaffoldState,
             backgroundColor = Color.Transparent,
             topBar = {
 
-                TopAppBar(title = { Text(text = "Antrenman Programı Detayı") },
+                TopAppBar(
+                    title = { Text(text = "Antrenman Programı Detayı") },
                     backgroundColor = colorResource(id = R.color.orengeAna)
                 )
             },
@@ -69,27 +68,39 @@ fun AntremanDetay(program: Program){
                             )
                     ) {
 
-                        TextField(value = tfYazi.value, modifier = Modifier.fillMaxSize(), onValueChange ={tfYazi.value=it} )
+                        TextField(
+                            value = tfYazi.value,
+                            modifier = Modifier.fillMaxSize(),
+                            onValueChange = { tfYazi.value = it })
 
                     }
-                    Text(text = tfEMail.value, modifier = Modifier
-                        .size(height = 25.dp, width = 250.dp)
-                        .background(color = Color.White))
+                    Text(
+                        text = tfEMail.value, modifier = Modifier
+                            .size(height = 25.dp, width = 250.dp)
+                            .background(color = Color.White)
+                    )
                     TextField(value = tfProgramAdi.value,
-                        onValueChange = {tfProgramAdi.value = it},
+                        onValueChange = { tfProgramAdi.value = it },
                         colors = TextFieldDefaults.textFieldColors(backgroundColor = Color.LightGray),
-                        placeholder = { Text(text = "Progam Adını Giriniz")})
+                        placeholder = { Text(text = "Progam Adını Giriniz") })
 
                 }
             },
             floatingActionButton = {
-                FloatingActionButton(onClick = {
-                    val kisi_program = tfYazi.value
-                    val program_ad = tfProgramAdi.value
-                    viewModel.güncelle(program.kisi_id!!,kisi_program,program_ad)
+                FloatingActionButton(
+                    onClick = {
+                        val kisi_program = tfYazi.value
+                        val program_ad = tfProgramAdi.value
+                        viewModel.GUncelle(program.kisi_id!!, kisi_program, program_ad)
 
-                }, shape = RoundedCornerShape(50), backgroundColor = colorResource(id = R.color.buttonP)) {
-                    Icon(painter = painterResource(id = R.drawable.send_pic), contentDescription ="" )
+                    },
+                    shape = RoundedCornerShape(50),
+                    backgroundColor = colorResource(id = R.color.buttonP)
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.send_pic),
+                        contentDescription = ""
+                    )
                 }
             },
             isFloatingActionButtonDocked = true,

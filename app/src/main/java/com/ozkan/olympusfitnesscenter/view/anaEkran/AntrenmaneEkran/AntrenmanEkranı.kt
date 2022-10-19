@@ -1,6 +1,5 @@
 package com.ozkan.olympusfitnesscenter.view.anaEkran
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,27 +10,19 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.Query
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import com.ozkan.olympusfitnesscenter.R
-import com.ozkan.olympusfitnesscenter.entity.Program
 import com.ozkan.olympusfitnesscenter.viewmodel.ProgramViewModel
 
 @Composable
 fun AntrenmanProgaramiEkrani(navController: NavController) {
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-
     val aramaYapiliyor = remember { mutableStateOf(false) }
     val tfArama = remember { mutableStateOf("") }
 
@@ -52,7 +43,7 @@ fun AntrenmanProgaramiEkrani(navController: NavController) {
                                 value = tfArama.value,
                                 onValueChange = {
                                     tfArama.value = it
-                                    viewModel.ara(it)
+                                    viewModel.Ara(it)
                                 },
                                 label = { Text(text = "Ara") },
                                 colors = TextFieldDefaults.textFieldColors(
@@ -94,25 +85,27 @@ fun AntrenmanProgaramiEkrani(navController: NavController) {
             },
 
             content = {
-                LazyColumn(modifier = Modifier.background(color = Color.LightGray)){
+                LazyColumn(modifier = Modifier.background(color = Color.LightGray)) {
                     items(
                         count = programListesi.value!!.count(),
                         itemContent = {
                             val program = programListesi.value!![it]
-                            Card(modifier = Modifier
-                                .padding(all = 5.dp)
-                                .fillMaxWidth()){
+                            Card(
+                                modifier = Modifier
+                                    .padding(all = 5.dp)
+                                    .fillMaxWidth()
+                            ) {
                                 Row(modifier = Modifier.clickable {
                                     val programJson = Gson().toJson(program)
                                     navController.navigate("antremanDetay/${programJson}")
-                                }){
+                                }) {
                                     Row(
                                         modifier = Modifier
-                                            .padding(all = 10.dp).fillMaxWidth()
-                                            ,
+                                            .padding(all = 10.dp)
+                                            .fillMaxWidth(),
                                         verticalAlignment = Alignment.CenterVertically,
                                         horizontalArrangement = Arrangement.SpaceBetween
-                                    ){
+                                    ) {
 
                                         Column(
                                             verticalArrangement = Arrangement.SpaceEvenly,
@@ -123,10 +116,12 @@ fun AntrenmanProgaramiEkrani(navController: NavController) {
                                             Text(text = "Programın Adı:${program.program_ad}")
                                         }
                                         IconButton(onClick = {
-                                            viewModel.sil(program.kisi_id!!)
+                                            viewModel.Sil(program.kisi_id!!)
                                         }) {
-                                            Icon(painter = painterResource(id = R.drawable.del_pic),
-                                                contentDescription = "",tint = Color.Gray)
+                                            Icon(
+                                                painter = painterResource(id = R.drawable.del_pic),
+                                                contentDescription = "", tint = Color.Gray
+                                            )
                                         }
 
                                     }

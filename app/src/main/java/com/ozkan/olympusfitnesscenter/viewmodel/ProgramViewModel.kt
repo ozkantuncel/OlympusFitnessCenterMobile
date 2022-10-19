@@ -11,23 +11,23 @@ class ProgramViewModel:ViewModel() {
     var proKayit = ProgramDaoRepository()
 
     init {
-        progmlariAl()
+        ProgmlariAl()
         programListesi = proKayit.progamiGetir()
     }
 
-    fun progmlariAl(){
-        proKayit.tümProgramiAl()
+    fun ProgmlariAl(){
+        proKayit.tumProgramiAl()
     }
 
-    fun ara(aramaKelimesi:String){
+    fun Ara(aramaKelimesi:String){
         proKayit.programAra(aramaKelimesi)
     }
 
-    fun sil(kisi_id:String){
+    fun Sil(kisi_id:String){
         proKayit.programSil(kisi_id)
     }
 
-    fun güncelle(kisi_id:String,kisi_program:String,program_ad:String){
-        proKayit.programGüncele(kisi_id,kisi_program,program_ad)
+    fun GUncelle(kisi_id:String, kisi_program:String, program_ad:String){
+        proKayit.programGuncele(kisi_id,kisi_program,program_ad)
     }
 }

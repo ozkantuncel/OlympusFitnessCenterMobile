@@ -17,7 +17,7 @@ class AletViewModel:ViewModel() {
     }
 
     fun aletleriAl(){
-        aletAl.tümAletleriAl()
+        aletAl.tumAletleriAl()
     }
 
     fun ara(aramaKelimesi:String){

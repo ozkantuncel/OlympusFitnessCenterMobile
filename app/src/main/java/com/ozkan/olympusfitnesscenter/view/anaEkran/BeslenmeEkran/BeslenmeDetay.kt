@@ -9,8 +9,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,25 +17,25 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ozkan.olympusfitnesscenter.R
-import com.ozkan.olympusfitnesscenter.viewmodel.AletViewModel
 
 @Composable
-fun BeslenmeDetay(icerik:String){
+fun BeslenmeDetay(icerik: String) {
 
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
-    Box{
-        Image(painter = painterResource(id = R.drawable.fts), contentDescription = "",
+    Box {
+        Image(
+            painter = painterResource(id = R.drawable.fts), contentDescription = "",
             modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds)
+            contentScale = ContentScale.FillBounds
+        )
         Scaffold(
             scaffoldState = scaffoldState,
             backgroundColor = Color.Transparent,
             topBar = {
 
-                TopAppBar(title = { Text(text = "Diyet Programı") },
+                TopAppBar(
+                    title = { Text(text = "Diyet Programı") },
                     backgroundColor = colorResource(id = R.color.orengeAna)
                 )
             },
@@ -48,8 +46,17 @@ fun BeslenmeDetay(icerik:String){
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-                    Text(text = icerik,color = Color.Black,fontSize = 20.sp, modifier = Modifier.background(
-                        Color.White).border(2.dp, Color.Yellow).padding(10.dp))
+                    Text(
+                        text = icerik,
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .background(
+                                Color.White
+                            )
+                            .border(2.dp, Color.Yellow)
+                            .padding(10.dp)
+                    )
                     //anilsytk23@gmail.com
 
                 }

@@ -24,7 +24,7 @@ I made Fitness App with using `Jetpack Compose`. I I am using [Firebase][1] as d
 ```
 MIT License
 
-Copyright (c) 2022 Özkan Tuncel
+Copyright (c) 2022 Özkan TUNCEL
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
